@@ -378,8 +378,23 @@ window.scrollToRef = (page, section) => {
   }
 };
 
+// ── Floating chat FAB ────────────────────────────────────
+const chatPopup = $('chat-popup');
+const chatFab   = $('chat-fab');
+
+chatFab.addEventListener('click', () => {
+  chatPopup.classList.toggle('open');
+  if (chatPopup.classList.contains('open')) {
+    $('fab-badge').classList.remove('visible');
+    setTimeout(() => $('chat-input').focus(), 50);
+  }
+});
+$('chat-popup-close').addEventListener('click', () => chatPopup.classList.remove('open'));
+
 // ── Ask in chat ───────────────────────────────────────────
 window.askInChat = (question) => {
+  chatPopup.classList.add('open');
+  $('fab-badge').classList.remove('visible');
   const input = $('chat-input');
   input.value = question;
   input.focus();
@@ -465,6 +480,9 @@ async function sendChat() {
     state.chatStreaming = false;
     chatSend.disabled = false;
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    if (!chatPopup.classList.contains('open')) {
+      $('fab-badge').classList.add('visible');
+    }
   }
 }
 

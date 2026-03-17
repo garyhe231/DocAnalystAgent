@@ -19,26 +19,6 @@
     <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="session-label"></div>
   </header>
 
-  <!-- Persistent Chat Column -->
-  <section class="chat-column">
-    <div class="chat-column-header">
-      <span>💬</span> Document Chat
-    </div>
-    <div id="chat-messages" class="chat-messages">
-      <div class="msg assistant">
-        <div class="msg-avatar">🤖</div>
-        <div class="msg-bubble">Hello! Upload a document and I'll help you analyze it. Ask me anything about the document content, suggestions, or questions.</div>
-      </div>
-    </div>
-    <div class="chat-hint">Enter to send · Shift+Enter new line · EN/ZH</div>
-    <div class="chat-input-area">
-      <div class="chat-input-wrap">
-        <textarea id="chat-input" placeholder="Ask about the document..." rows="1"></textarea>
-      </div>
-      <button id="chat-send">➤</button>
-    </div>
-  </section>
-
   <!-- Sidebar -->
   <aside class="sidebar">
     <!-- Upload Zone -->
@@ -210,6 +190,34 @@
 
 
   </main>
+</div>
+
+<!-- Floating Chat Button -->
+<button id="chat-fab" title="Chat with document">
+  💬
+  <span class="fab-badge" id="fab-badge"></span>
+</button>
+
+<!-- Chat Popup -->
+<div id="chat-popup">
+  <div class="chat-popup-header">
+    <span>🤖</span>
+    <h3>Document Chat</h3>
+    <button id="chat-popup-close">×</button>
+  </div>
+  <div id="chat-messages" class="chat-messages">
+    <div class="msg assistant">
+      <div class="msg-avatar">🤖</div>
+      <div class="msg-bubble">Hello! Upload a document and I'll help you analyze it. Ask me anything in English or Chinese.</div>
+    </div>
+  </div>
+  <div class="chat-hint">Enter to send · Shift+Enter new line · EN / ZH</div>
+  <div class="chat-input-area">
+    <div class="chat-input-wrap">
+      <textarea id="chat-input" placeholder="Ask about the document..." rows="1"></textarea>
+    </div>
+    <button id="chat-send">➤</button>
+  </div>
 </div>
 
 <!-- Loading Overlay -->
