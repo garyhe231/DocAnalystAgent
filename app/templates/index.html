@@ -19,6 +19,26 @@
     <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="session-label"></div>
   </header>
 
+  <!-- Persistent Chat Column -->
+  <section class="chat-column">
+    <div class="chat-column-header">
+      <span>💬</span> Document Chat
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="msg assistant">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-bubble">Hello! Upload a document and I'll help you analyze it. Ask me anything about the document content, suggestions, or questions.</div>
+      </div>
+    </div>
+    <div class="chat-hint">Enter to send · Shift+Enter new line · EN/ZH</div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrap">
+        <textarea id="chat-input" placeholder="Ask about the document..." rows="1"></textarea>
+      </div>
+      <button id="chat-send">➤</button>
+    </div>
+  </section>
+
   <!-- Sidebar -->
   <aside class="sidebar">
     <!-- Upload Zone -->
@@ -66,9 +86,6 @@
       </div>
       <div class="nav-tab" data-panel="translation">
         <span>🌐</span> Translation
-      </div>
-      <div class="nav-tab" data-panel="chat">
-        <span>💬</span> Chat
       </div>
     </nav>
 
@@ -191,29 +208,6 @@
       </div>
     </div>
 
-    <!-- Chat Panel -->
-    <div class="panel chat-panel" id="chat-panel">
-      <div class="panel-header">
-        <span style="font-size:18px">💬</span>
-        <div>
-          <h2>Document Chat</h2>
-          <div class="subtitle">Ask anything about the document — supports English and Chinese</div>
-        </div>
-      </div>
-      <div id="chat-messages" class="chat-messages">
-        <div class="msg assistant">
-          <div class="msg-avatar">🤖</div>
-          <div class="msg-bubble">Hello! Upload a document and I'll help you analyze it. Ask me anything about the document content, suggestions, or questions.</div>
-        </div>
-      </div>
-      <div class="chat-hint">Press Enter to send · Shift+Enter for new line · Supports English and Chinese</div>
-      <div class="chat-input-area">
-        <div class="chat-input-wrap">
-          <textarea id="chat-input" placeholder="Ask about the document..." rows="1"></textarea>
-        </div>
-        <button id="chat-send">➤</button>
-      </div>
-    </div>
 
   </main>
 </div>

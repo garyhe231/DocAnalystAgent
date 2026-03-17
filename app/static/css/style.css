@@ -18,11 +18,11 @@
 html, body { height: 100%; font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
 
 /* ── Layout ── */
-.app { display: grid; grid-template-columns: 280px 1fr; grid-template-rows: 56px 1fr; height: 100vh; }
+.app { display: grid; grid-template-columns: 300px 260px 1fr; grid-template-rows: 56px 1fr; height: 100vh; }
 
 /* ── Header ── */
 header {
-  grid-column: 1 / -1;
+  grid-column: 1 / 4;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 12px;
@@ -31,8 +31,27 @@ header {
 header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
 header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); color: #fff; border-radius: 20px; }
 
+/* ── Persistent Chat Column ── */
+.chat-column {
+  grid-column: 1;
+  grid-row: 2;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.chat-column-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; color: var(--text);
+  flex-shrink: 0;
+}
+
 /* ── Sidebar ── */
 .sidebar {
+  grid-column: 2;
+  grid-row: 2;
   background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column;
@@ -121,6 +140,8 @@ header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); c
 
 /* ── Main Content ── */
 .main-content {
+  grid-column: 3;
+  grid-row: 2;
   display: flex; flex-direction: column;
   overflow: hidden;
 }
@@ -270,13 +291,13 @@ header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); c
 
 /* ── Chat Panel ── */
 .chat-panel { height: 100%; display: flex; flex-direction: column; }
-.chat-messages { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
-.msg { display: flex; gap: 10px; max-width: 85%; }
+.chat-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.msg { display: flex; gap: 8px; max-width: 95%; }
 .msg.user { flex-direction: row-reverse; align-self: flex-end; }
 .msg-bubble {
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 13px;
+  padding: 8px 11px;
+  border-radius: 12px;
+  font-size: 12px;
   line-height: 1.6;
   word-break: break-word;
 }
@@ -292,22 +313,22 @@ header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); c
 @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
 
 .chat-input-area {
-  padding: 16px 24px;
+  padding: 10px 12px;
   border-top: 1px solid var(--border);
   background: var(--surface);
-  display: flex; gap: 10px; align-items: flex-end;
+  display: flex; gap: 8px; align-items: flex-end;
 }
 .chat-input-wrap { flex: 1; position: relative; }
 #chat-input {
   width: 100%;
   background: var(--surface2);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--text);
-  font-size: 13px;
-  padding: 10px 14px;
+  font-size: 12px;
+  padding: 8px 10px;
   resize: none;
-  max-height: 120px;
+  max-height: 100px;
   overflow-y: auto;
   outline: none;
   font-family: inherit;
@@ -315,12 +336,12 @@ header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); c
 }
 #chat-input:focus { border-color: var(--accent); }
 #chat-send {
-  width: 40px; height: 40px;
-  border-radius: 10px;
+  width: 34px; height: 34px;
+  border-radius: 8px;
   border: none;
   background: var(--accent);
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -328,7 +349,7 @@ header .badge { font-size: 11px; padding: 2px 8px; background: var(--accent2); c
 }
 #chat-send:hover { opacity: 0.85; }
 #chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
-.chat-hint { font-size: 11px; color: var(--muted); padding: 0 24px 8px; }
+.chat-hint { font-size: 10px; color: var(--muted); padding: 0 12px 6px; }
 
 /* ── Loading Overlay ── */
 .loading-overlay {

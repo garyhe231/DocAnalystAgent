@@ -380,7 +380,6 @@ window.scrollToRef = (page, section) => {
 
 // ── Ask in chat ───────────────────────────────────────────
 window.askInChat = (question) => {
-  switchTab('chat');
   const input = $('chat-input');
   input.value = question;
   input.focus();
