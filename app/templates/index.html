@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocAnalyst Agent</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app">
+
+  <!-- Header -->
+  <header>
+    <div style="font-size:22px">📄</div>
+    <h1>DocAnalyst Agent</h1>
+    <span class="badge">AI-Powered</span>
+    <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="session-label"></div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="upload-zone">
+      <div class="icon">📁</div>
+      <p><strong>Click to upload</strong> or drag & drop</p>
+      <p class="hint">PDF · DOCX · PPTX · XLSX · TXT · CSV · MD</p>
+      <input type="file" id="file-input" accept=".pdf,.docx,.pptx,.xlsx,.xls,.txt,.md,.csv">
+    </div>
+
+    <!-- Doc Info -->
+    <div class="doc-info" id="doc-info">
+      <div class="name" id="doc-name">—</div>
+      <div class="pages" id="doc-pages">—</div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-btns">
+      <button class="btn btn-primary" id="btn-analyze" disabled>
+        <span>🔍</span> Analyze Document
+      </button>
+      <button class="btn btn-secondary" id="btn-translate" disabled>
+        <span>🌐</span> Translate to Chinese
+      </button>
+      <button class="btn btn-outline" id="btn-clear" disabled>
+        <span>🗑</span> Clear Session
+      </button>
+    </div>
+
+    <!-- Nav Tabs -->
+    <nav class="nav-tabs" style="margin-top:20px">
+      <div class="nav-tab active" data-panel="welcome">
+        <span>🏠</span> Home
+      </div>
+      <div class="nav-tab" data-panel="summary">
+        <span>📋</span> Summary
+      </div>
+      <div class="nav-tab" data-panel="suggestions">
+        <span>💡</span> Suggestions
+        <span class="count" id="suggestions-count"></span>
+      </div>
+      <div class="nav-tab" data-panel="questions">
+        <span>❓</span> Questions
+        <span class="count" id="questions-count"></span>
+      </div>
+      <div class="nav-tab" data-panel="translation">
+        <span>🌐</span> Translation
+      </div>
+      <div class="nav-tab" data-panel="chat">
+        <span>💬</span> Chat
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      Powered by Claude claude-opus-4-6 · DocAnalystAgent v1.0
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Welcome Panel -->
+    <div class="panel active" id="welcome-panel">
+      <div class="panel-body">
+        <div class="welcome">
+          <div class="big-icon">📄</div>
+          <h3>Document Analysis Agent</h3>
+          <p>Upload any document to get instant AI-powered analysis: Chinese translation, executive summary, actionable suggestions, and probing questions — all anchored to exact page and line references.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="icon">🌐</div>
+              <h4>Chinese Translation</h4>
+              <p>Full document translated to Simplified Chinese, preserving structure</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">📋</div>
+              <h4>Smart Summary</h4>
+              <p>Executive summary, key points, and topic extraction in EN & ZH</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">💡</div>
+              <h4>Objective Suggestions</h4>
+              <p>Actionable improvements pinpointed to exact page, section, and line</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">❓</div>
+              <h4>Probing Questions</h4>
+              <p>Critical questions that expose gaps, assumptions, and missing evidence</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">💬</div>
+              <h4>Interactive Chat</h4>
+              <p>Ask anything about the document with full context awareness</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">📌</div>
+              <h4>Exact References</h4>
+              <p>Every insight linked to Page · Section · Line for easy navigation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Panel -->
+    <div class="panel" id="summary-panel">
+      <div class="panel-header">
+        <span style="font-size:18px">📋</span>
+        <div>
+          <h2>Document Summary</h2>
+          <div class="subtitle">Executive overview with key points and topics</div>
+        </div>
+      </div>
+      <div class="panel-body" id="summary-body">
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <p>Run analysis to see summary</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggestions Panel -->
+    <div class="panel" id="suggestions-panel">
+      <div class="panel-header">
+        <span style="font-size:18px">💡</span>
+        <div>
+          <h2>Suggestions</h2>
+          <div class="subtitle">Objective improvement suggestions anchored to exact locations</div>
+        </div>
+      </div>
+      <div class="panel-body" id="suggestions-body">
+        <div class="empty-state">
+          <div class="icon">💡</div>
+          <p>Run analysis to see suggestions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions Panel -->
+    <div class="panel" id="questions-panel">
+      <div class="panel-header">
+        <span style="font-size:18px">❓</span>
+        <div>
+          <h2>Probing Questions</h2>
+          <div class="subtitle">Critical questions to expose gaps, assumptions, and missing evidence</div>
+        </div>
+      </div>
+      <div class="panel-body" id="questions-body">
+        <div class="empty-state">
+          <div class="icon">❓</div>
+          <p>Run analysis to see questions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation Panel -->
+    <div class="panel" id="translation-panel">
+      <div class="panel-header">
+        <span style="font-size:18px">🌐</span>
+        <div>
+          <h2>Chinese Translation</h2>
+          <div class="subtitle">Full document translated to Simplified Chinese</div>
+        </div>
+      </div>
+      <div class="panel-body" id="translation-body">
+        <div class="empty-state">
+          <div class="icon">🌐</div>
+          <p>Click "Translate to Chinese" to see translation</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Panel -->
+    <div class="panel chat-panel" id="chat-panel">
+      <div class="panel-header">
+        <span style="font-size:18px">💬</span>
+        <div>
+          <h2>Document Chat</h2>
+          <div class="subtitle">Ask anything about the document — supports English and Chinese</div>
+        </div>
+      </div>
+      <div id="chat-messages" class="chat-messages">
+        <div class="msg assistant">
+          <div class="msg-avatar">🤖</div>
+          <div class="msg-bubble">Hello! Upload a document and I'll help you analyze it. Ask me anything about the document content, suggestions, or questions.</div>
+        </div>
+      </div>
+      <div class="chat-hint">Press Enter to send · Shift+Enter for new line · Supports English and Chinese</div>
+      <div class="chat-input-area">
+        <div class="chat-input-wrap">
+          <textarea id="chat-input" placeholder="Ask about the document..." rows="1"></textarea>
+        </div>
+        <button id="chat-send">➤</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loading-text">Processing...</div>
+    <div class="loading-sub" id="loading-sub"></div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
